@@ -30,6 +30,7 @@
   #include "../HAL/shared/eeprom_if.h"
   #include "../HAL/shared/Delay.h"
 
+  #define    E2END        0x0fff    //*    4 k of simulated EEPROM
   /**
    * Dn: G-code for development and testing
    *
