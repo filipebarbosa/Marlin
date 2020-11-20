@@ -70,7 +70,7 @@
 // @section info
 
 // Author info of this build printed to the host during boot and M115
-#define STRING_CONFIG_H_AUTHOR "(FILIPE, 19-10-2020 SKR 1.4 Voolt3D)" // Who made the changes.
+#define STRING_CONFIG_H_AUTHOR "(FILIPE, 19-11-2020 SKR 1.4 Voolt3D)" // Who made the changes.
 //#define CUSTOM_VERSION_FILE Version.h // Path from the root directory (no quotes)
 
 /**
@@ -120,7 +120,7 @@
  *
  * :[2400, 9600, 19200, 38400, 57600, 115200, 250000, 500000, 1000000]
  */
-#define BAUDRATE 250000
+#define BAUDRATE 115200
 
 // Enable the Bluetooth serial interface on AT90USB devices
 //#define BLUETOOTH
@@ -683,7 +683,7 @@
 #define Z_DRIVER_TYPE TMC2209
 //#define X2_DRIVER_TYPE A4988
 //#define Y2_DRIVER_TYPE A4988
-//#define Z2_DRIVER_TYPE A4988
+//#define Z2_DRIVER_TYPE TMC2209
 //#define Z3_DRIVER_TYPE A4988
 //#define Z4_DRIVER_TYPE A4988
 #define E0_DRIVER_TYPE TMC2209
@@ -748,11 +748,11 @@
  * Override with M203
  *                                      X, Y, Z, E0 [, E1[, E2...]]
  */
-#define DEFAULT_MAX_FEEDRATE          { 300, 300, 5, 25 }
+#define DEFAULT_MAX_FEEDRATE          { 300, 300, 3, 25 }//anterior 10
 
-//#define LIMITED_MAX_FR_EDITING        // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
+#define LIMITED_MAX_FR_EDITING        // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
 #if ENABLED(LIMITED_MAX_FR_EDITING)
-  #define MAX_FEEDRATE_EDIT_VALUES    { 600, 600, 5, 50 } // ...or, set your own edit limits. Z = 10
+  #define MAX_FEEDRATE_EDIT_VALUES    { 600, 600, 3, 50 } // ...or, set your own edit limits. Z = 10
 #endif
 
 /**
@@ -761,11 +761,11 @@
  * Override with M201
  *                                      X, Y, Z, E0 [, E1[, E2...]]
  */
-#define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 3, 10000 } // z= 100
+#define DEFAULT_MAX_ACCELERATION      { 3000, 3000, 15, 1000} // z= 100
 
-//#define LIMITED_MAX_ACCEL_EDITING     // Limit edit via M201 or LCD to DEFAULT_MAX_ACCELERATION * 2
+#define LIMITED_MAX_ACCEL_EDITING     // Limit edit via M201 or LCD to DEFAULT_MAX_ACCELERATION * 2
 #if ENABLED(LIMITED_MAX_ACCEL_EDITING)
-  #define MAX_ACCEL_EDIT_VALUES       { 6000, 6000, 200, 20000 } // ...or, set your own edit limits
+  #define MAX_ACCEL_EDIT_VALUES       { 6000, 6000, 15, 2000} // ...or, set your own edit limits
 #endif
 
 /**
@@ -776,9 +776,9 @@
  *   M204 R    Retract Acceleration
  *   M204 T    Travel Acceleration
  */
-#define DEFAULT_ACCELERATION          3000    // X, Y, Z and E acceleration for printing moves
+#define DEFAULT_ACCELERATION          3000    // X, Y, Z and E acceleration for printing moves 3000
 #define DEFAULT_RETRACT_ACCELERATION  3000    // E acceleration for retracts
-#define DEFAULT_TRAVEL_ACCELERATION   3000    // X, Y, Z acceleration for travel (non printing) moves
+#define DEFAULT_TRAVEL_ACCELERATION   3000    // X, Y, Z acceleration for travel (non printing) moves 3000
 
 /**
  * Default Jerk limits (mm/s)
@@ -796,13 +796,13 @@
 
   //#define TRAVEL_EXTRA_XYJERK 0.0     // Additional jerk allowance for all travel moves
 
-  //#define LIMITED_JERK_EDITING        // Limit edit via M205 or LCD to DEFAULT_aJERK * 2
+  #define LIMITED_JERK_EDITING        // Limit edit via M205 or LCD to DEFAULT_aJERK * 2
   #if ENABLED(LIMITED_JERK_EDITING)
     #define MAX_JERK_EDIT_VALUES { 20, 20, 0.6, 10 } // ...or, set your own edit limits
   #endif
 #endif
 
-#define DEFAULT_EJERK    5.0  // May be used by Linear Advance
+#define DEFAULT_EJERK    5.0  // May be used by Linear Advance **Anterior 5
 
 /**
  * Junction Deviation Factor
@@ -1394,7 +1394,7 @@
 
 // Homing speeds (mm/min)
 #define HOMING_FEEDRATE_XY (50*60)
-#define HOMING_FEEDRATE_Z  (200) // Original 4*60 = Testado OK 3*60
+#define HOMING_FEEDRATE_Z  (3*60) // Original 4*60 = Testado OK 3*60
 
 // Validate that endstops are triggered on homing moves
 #define VALIDATE_HOMING_ENDSTOPS
@@ -1504,7 +1504,7 @@
 // Preheat Constants
 #define PREHEAT_1_LABEL       "PLA"
 #define PREHEAT_1_TEMP_HOTEND 200
-#define PREHEAT_1_TEMP_BED     70
+#define PREHEAT_1_TEMP_BED     60
 #define PREHEAT_1_FAN_SPEED     0 // Value from 0 to 255
 
 #define PREHEAT_2_LABEL       "ABS"
@@ -1532,7 +1532,7 @@
   //#define NOZZLE_PARK_Y_ONLY          // Y move only is required to park
   #define NOZZLE_PARK_Z_RAISE_MIN   2   // (mm) Always raise Z by at least this distance
   #define NOZZLE_PARK_XY_FEEDRATE 100   // (mm/s) X and Y axes feedrate (also used for delta Z axis)
-  #define NOZZLE_PARK_Z_FEEDRATE    5   // (mm/s) Z axis feedrate (not used for delta printers)
+  #define NOZZLE_PARK_Z_FEEDRATE    3   // (mm/s) Z axis feedrate (not used for delta printers) - antes 5**
 #endif
 
 /**
@@ -1685,7 +1685,7 @@
  *
  * :{ 'en':'English', 'an':'Aragonese', 'bg':'Bulgarian', 'ca':'Catalan', 'cz':'Czech', 'da':'Danish', 'de':'German', 'el':'Greek', 'el_gr':'Greek (Greece)', 'es':'Spanish', 'eu':'Basque-Euskera', 'fi':'Finnish', 'fr':'French', 'gl':'Galician', 'hr':'Croatian', 'hu':'Hungarian', 'it':'Italian', 'jp_kana':'Japanese', 'ko_KR':'Korean (South Korea)', 'nl':'Dutch', 'pl':'Polish', 'pt':'Portuguese', 'pt_br':'Portuguese (Brazilian)', 'ro':'Romanian', 'ru':'Russian', 'sk':'Slovak', 'tr':'Turkish', 'uk':'Ukrainian', 'vi':'Vietnamese', 'zh_CN':'Chinese (Simplified)', 'zh_TW':'Chinese (Traditional)', 'test':'TEST' }
  */
-#define LCD_LANGUAGE en
+#define LCD_LANGUAGE pt_br
 
 /**
  * LCD Character Set

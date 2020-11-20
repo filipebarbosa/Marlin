@@ -41,7 +41,6 @@
   #include <pins_arduino.h>
 #endif
 #include <math.h>
-
 #include "core/utility.h"
 #include "module/motion.h"
 #include "module/planner.h"

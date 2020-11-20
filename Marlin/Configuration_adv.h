@@ -573,7 +573,7 @@
 //
 // For Z set the number of stepper drivers
 //
-#define NUM_Z_STEPPER_DRIVERS 2  // (1-4) Z options change based on how many
+#define NUM_Z_STEPPER_DRIVERS 1  // (1-4) Z options change based on how many
 
 #if NUM_Z_STEPPER_DRIVERS > 1
   //#define Z_MULTI_ENDSTOPS
@@ -737,7 +737,7 @@
  * Z Steppers Auto-Alignment
  * Add the G34 command to align multiple Z steppers using a bed probe.
  */
-#define Z_STEPPER_AUTO_ALIGN
+//#define Z_STEPPER_AUTO_ALIGN
 #if ENABLED(Z_STEPPER_AUTO_ALIGN)
   // Define probe X and Y positions for Z1, Z2 [, Z3 [, Z4]]
   // If not defined, probe limits will be used.
@@ -1049,7 +1049,7 @@
 // @section lcd
 
 #if EITHER(ULTIPANEL, EXTENSIBLE_UI)
-  #define MANUAL_FEEDRATE { 50*60, 50*60, 200, 2*60 } // (mm/min) Feedrates for manual moves along X, Y, Z, E from panel
+  #define MANUAL_FEEDRATE { 50*60, 50*60, 3*60, 2*60 } // (mm/min) Feedrates for manual moves along X, Y, Z, E from panel
   #define SHORT_MANUAL_Z_MOVE 0.025 // (mm) Smallest manual Z move (< 0.1mm)
   #if ENABLED(ULTIPANEL)
     #define MANUAL_E_MOVES_RELATIVE // Display extruder move distance rather than "position"
@@ -1075,7 +1075,7 @@
 
   // Add Probe Z Offset calibration to the Z Probe Offsets menu
   #if HAS_BED_PROBE
-    //#define PROBE_OFFSET_WIZARD
+    #define PROBE_OFFSET_WIZARD
     #if ENABLED(PROBE_OFFSET_WIZARD)
       #define PROBE_OFFSET_START -4.0   // Estimated nozzle-to-probe Z offset, plus a little extra
     #endif
@@ -1195,7 +1195,7 @@
    * an option on the LCD screen to continue the print from the last-known
    * point in the file.
    */
-  //#define POWER_LOSS_RECOVERY
+  #define POWER_LOSS_RECOVERY
   #if ENABLED(POWER_LOSS_RECOVERY)
     #define PLR_ENABLED_DEFAULT   false // Power Loss Recovery enabled by default. (Set with 'M413 Sn' & M500)
     //#define BACKUP_POWER_SUPPLY       // Backup power / UPS to move the steppers on power loss
@@ -1987,7 +1987,7 @@
  *
  * Note that M207 / M208 / M209 settings are saved to EEPROM.
  */
-//#define FWRETRACT
+#define FWRETRACT // Verificar e tirar depois - Teste
 #if ENABLED(FWRETRACT)
   #define FWRETRACT_AUTORETRACT           // Override slicer retractions
   #if ENABLED(FWRETRACT_AUTORETRACT)
@@ -2000,8 +2000,8 @@
   #define RETRACT_ZRAISE 0                // (mm) Default retract Z-raise
   #define RETRACT_RECOVER_LENGTH 0        // (mm) Default additional recover length (added to retract length on recover)
   #define RETRACT_RECOVER_LENGTH_SWAP 0   // (mm) Default additional swap recover length (added to retract length on recover from toolchange)
-  #define RETRACT_RECOVER_FEEDRATE 8      // (mm/s) Default feedrate for recovering from retraction
-  #define RETRACT_RECOVER_FEEDRATE_SWAP 8 // (mm/s) Default feedrate for recovering from swap retraction
+  #define RETRACT_RECOVER_FEEDRATE 3      // (mm/s) Default feedrate for recovering from retraction
+  #define RETRACT_RECOVER_FEEDRATE_SWAP 3 // (mm/s) Default feedrate for recovering from swap retraction
   #if ENABLED(MIXING_EXTRUDER)
     //#define RETRACT_SYNC_MIXING         // Retract and restore all mixing steppers simultaneously
   #endif
@@ -2098,10 +2098,10 @@
                                                   //   For Bowden, the full length of the tube and nozzle.
                                                   //   For direct drive, the full length of the nozzle.
                                                   //   Set to 0 for manual unloading.
-  #define FILAMENT_CHANGE_SLOW_LOAD_FEEDRATE   6  // (mm/s) Slow move when starting load.
+  #define FILAMENT_CHANGE_SLOW_LOAD_FEEDRATE   3  // (mm/s) Slow move when starting load.
   #define FILAMENT_CHANGE_SLOW_LOAD_LENGTH     0  // (mm) Slow length, to allow time to insert material.
                                                   // 0 to disable start loading and skip to fast load only
-  #define FILAMENT_CHANGE_FAST_LOAD_FEEDRATE   6  // (mm/s) Load filament feedrate. This can be pretty fast.
+  #define FILAMENT_CHANGE_FAST_LOAD_FEEDRATE   3  // (mm/s) Load filament feedrate. This can be pretty fast.
   #define FILAMENT_CHANGE_FAST_LOAD_ACCEL     25  // (mm/s^2) Lower acceleration may allow a faster feedrate.
   #define FILAMENT_CHANGE_FAST_LOAD_LENGTH     0  // (mm) Load length of filament, from extruder gear to nozzle.
                                                   //   For Bowden, the full length of the tube and nozzle.
@@ -2502,7 +2502,7 @@
    * STEALTHCHOP_(XY|Z|E) must be enabled to use HYBRID_THRESHOLD.
    * M913 X/Y/Z/E to live tune the setting
    */
-  //#define HYBRID_THRESHOLD
+  //#define HYBRID_THRESHOLD ///Voltar casso não precise
 
   #define X_HYBRID_THRESHOLD     100  // [mm/s]
   #define X2_HYBRID_THRESHOLD    100
@@ -3197,7 +3197,7 @@
 //#define GCODE_MOTION_MODES  // Remember the motion mode (G0 G1 G2 G3 G5 G38.X) and apply for X Y Z E F, etc.
 
 // Enable and set a (default) feedrate for all G0 moves
-//#define G0_FEEDRATE 3000 // (mm/min)
+//#define G0_FEEDRATE 15 // (mm/min)
 #ifdef G0_FEEDRATE
   //#define VARIABLE_G0_FEEDRATE // The G0 feedrate is set by F in G0 motion mode
 #endif
@@ -3586,4 +3586,4 @@
 //#define PINS_DEBUGGING
 
 // Enable Marlin dev mode which adds some special commands
-#define MARLIN_DEV_MODE
+//#define MARLIN_DEV_MODE
